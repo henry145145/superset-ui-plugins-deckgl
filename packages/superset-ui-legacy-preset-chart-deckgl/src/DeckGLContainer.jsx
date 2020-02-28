@@ -80,9 +80,9 @@ export default class DeckGLContainer extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     const { viewport } = nextProps;
-    this.setState({viewState: viewport});
+    this.setState({ viewState: viewport });
   }
 
   layers() {
@@ -100,6 +100,7 @@ export default class DeckGLContainer extends React.Component {
     const adjustedHeight = height - bottomMargin;
 
     const layers = this.layers();
+    console.log(layers);
 
     return (
       <div style={{ position: 'relative', width, height: adjustedHeight }}>
