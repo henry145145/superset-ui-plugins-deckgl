@@ -61,7 +61,10 @@ export function getBounds(points) {
   const latBounds = latExt[0] === latExt[1] ? getLatBoundsForSingleCoordinate(latExt) : latExt;
   const lngBounds = lngExt[0] === lngExt[1] ? getLngBoundsForSingleCoordinate(lngExt) : lngExt;
 
-  return [[lngBounds[0], latBounds[0]], [lngBounds[1], latBounds[1]]];
+  return [
+    [lngBounds[0], latBounds[0]],
+    [lngBounds[1], latBounds[1]],
+  ];
 }
 
 export function fitViewport(viewport, points, padding = 10) {
