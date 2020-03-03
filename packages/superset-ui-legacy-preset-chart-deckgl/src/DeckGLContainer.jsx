@@ -23,6 +23,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MapGL from 'react-map-gl';
+// import StaticMap from 'react-map-gl';
 import DeckGL from 'deck.gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { isEqual } from 'lodash';
@@ -37,6 +38,7 @@ const propTypes = {
   mapStyle: PropTypes.string,
   mapboxApiAccessToken: PropTypes.string.isRequired,
   onViewportChange: PropTypes.func,
+  vizType: PropTypes.string,
 };
 const defaultProps = {
   mapStyle: 'light',
@@ -106,12 +108,17 @@ export default class DeckGLContainer extends React.Component {
 
   render() {
     const { viewport } = this.props;
-
+    const { vizType } = this.props;
+    const isPath = vizType === 'deck_path';
     return (
       <MapGL
         {...viewport}
         mapStyle={this.props.mapStyle}
         onViewportChange={this.onViewportChange}
+        dragPan={!isPath}
+        dragRotate={!isPath}
+        scrollZoom={!isPath}
+        doubleClickZoom={!isPath}
         mapboxApiAccessToken={this.props.mapboxApiAccessToken}
       >
         <DeckGL {...viewport} layers={this.layers()} initWebGLParameters />

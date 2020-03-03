@@ -64,10 +64,11 @@ class DeckMulti extends React.PureComponent {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { formData, payload } = nextProps;
-    const hasChanges = !_.isEqual(this.props.formData.deck_slices, nextProps.formData.deck_slices);
-    if (hasChanges) {
-      this.loadLayers(formData, payload);
-    }
+    // const hasChanges = !_.isEqual(this.props.formData.deck_slices, nextProps.formData.deck_slices);
+    // if (hasChanges) {
+    //   this.loadLayers(formData, payload);
+    // }
+    this.loadLayers(formData, payload);
   }
 
   onViewportChange(viewport) {
@@ -90,6 +91,8 @@ class DeckMulti extends React.PureComponent {
         form_data: {
           ...subslice.form_data,
           filters,
+          adhoc_filters: formData.adhoc_filters,
+          extra_filters: filters,
         },
       };
 
@@ -121,7 +124,6 @@ class DeckMulti extends React.PureComponent {
     const { subSlicesLayers } = this.state;
 
     const layers = Object.values(subSlicesLayers);
-
     return (
       <DeckGLContainer
         mapboxApiAccessToken={payload.data.mapboxApiKey}
