@@ -74,22 +74,24 @@ export default class Legend extends React.PureComponent {
       return null;
     }
 
-    const categories = Object.entries(this.props.categories).map(([k, v]) => {
-      const style = { color: `rgba(${v.color.join(', ')})` };
-      const icon = v.enabled ? '\u25FC' : '\u25FB';
+    const categories = Object.entries(this.props.categories)
+      .sort()
+      .map(([k, v]) => {
+        const style = { color: `rgba(${v.color.join(', ')})` };
+        const icon = v.enabled ? '\u25FC' : '\u25FB';
 
-      return (
-        <li key={k}>
-          <a
-            href="#"
-            onClick={() => this.props.toggleCategory(k)}
-            onDoubleClick={() => this.props.showSingleCategory(k)}
-          >
-            <span style={style}>{icon}</span> {this.formatCategoryLabel(k)}
-          </a>
-        </li>
-      );
-    });
+        return (
+          <li key={k}>
+            <a
+              href="#"
+              onClick={() => this.props.toggleCategory(k)}
+              onDoubleClick={() => this.props.showSingleCategory(k)}
+            >
+              <span style={style}>{icon}</span> {this.formatCategoryLabel(k)}
+            </a>
+          </li>
+        );
+      });
 
     const vertical = this.props.position.charAt(0) === 't' ? 'top' : 'bottom';
     const horizontal = this.props.position.charAt(1) === 'r' ? 'right' : 'left';
